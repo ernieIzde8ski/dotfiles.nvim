@@ -18,7 +18,19 @@ return {
     {
         "rcarriga/nvim-notify",
         config = function()
-            vim.notify = require("notify")
+            local notify = require("notify")
+
+            notify.setup({
+                -- todo: switch to wrapped-default when merged:
+                -- https://github.com/rcarriga/nvim-notify/pull/286
+                render = "wrapped-compact",
+
+                max_width = function()
+                    return math.min(80, math.floor(vim.o.columns * 0.5))
+                end,
+            })
+
+            vim.notify = notify
         end,
     },
 
