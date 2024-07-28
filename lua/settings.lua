@@ -61,13 +61,20 @@ vim.opt.splitbelow = true
 vim.g.editorconfig = true
 
 vim.filetype.add({
+    extension = {
+        zsh = "sh",
+    },
     filename = {
         [".chezmoiignore"] = "gotmpl",
         [".chezmoiremove"] = "gotmpl",
         [".jsbeautifyrc"] = "json",
+        [".zshrc"] = "sh",
+        [".zshenv"] = "sh",
     },
     pattern = {
         [".*.tmpl"] = "gotmpl",
+        [".*dot_zshrc"] = "sh", -- chezmoi dotfile format
+        [".*dot_zshenv"] = "sh",
     },
 })
 
