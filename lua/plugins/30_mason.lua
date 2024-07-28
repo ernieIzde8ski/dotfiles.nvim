@@ -36,6 +36,15 @@ end
 -- all servers that use default capabilities
 ---@type { [string]: { filetypes?: string[], capabilities: any, settings: any } }
 local server_configs = {
+    biome = {
+        root_dir = function(fname)
+            local util = require("lspconfig.util")
+            return util.root_pattern("biome.json", "biome.jsonc")(fname)
+                or util.find_git_ancestor(fname)
+                or util.find_package_json_ancestor(fname)
+                or util.find_node_modules_ancestor(fname)
+        end
+    },
     hls = {
         filetypes = { "haskell", "lhaskell", "cabal" },
     },
