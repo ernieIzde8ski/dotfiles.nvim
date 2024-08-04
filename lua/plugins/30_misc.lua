@@ -7,12 +7,17 @@ return {
         "m4xshen/autoclose.nvim",
         opts = {
             keys = {
-                ["'"] = {
-                    close = false,
+                ["<"] = { close = true, escape = true, pair = "<>" },
+                ["'"] = { close = false, escape = true, pair = "''" },
+                ["|"] = {
+                    close = true,
                     escape = true,
-                    pair = "''",
-                    disable_command_mode = true,
+                    pair = "||",
+                    enabled_filetypes = { "rust" },
                 },
+            },
+            options = {
+                disable_command_mode = true,
             },
         },
     },
@@ -52,21 +57,39 @@ return {
             local neoscroll = require("neoscroll")
             local modes = { "n", "v", "x" }
             local keymaps = {
-                ["<C-u>"] = function() neoscroll.ctrl_u({ duration = 100 }) end,
-                ["<C-d>"] = function() neoscroll.ctrl_d({ duration = 100 }) end,
-                ["<C-b>"] = function() neoscroll.ctrl_b({ duration = 200 }) end,
-                ["<C-f>"] = function() neoscroll.ctrl_f({ duration = 200 }) end,
-                ["<C-y>"] = function() neoscroll.scroll(-0.1, { move_cursor = false, duration = 40 }) end,
-                ["<C-e>"] = function() neoscroll.scroll(0.1, { move_cursor = false, duration = 40 }) end,
-                ["zt"]    = function() neoscroll.zt({ half_win_duration = 100 }) end,
-                ["zz"]    = function() neoscroll.zz({ half_win_duration = 100 }) end,
-                ["zb"]    = function() neoscroll.zb({ half_win_duration = 100 }) end,
+                ["<C-u>"] = function()
+                    neoscroll.ctrl_u({ duration = 100 })
+                end,
+                ["<C-d>"] = function()
+                    neoscroll.ctrl_d({ duration = 100 })
+                end,
+                ["<C-b>"] = function()
+                    neoscroll.ctrl_b({ duration = 200 })
+                end,
+                ["<C-f>"] = function()
+                    neoscroll.ctrl_f({ duration = 200 })
+                end,
+                ["<C-y>"] = function()
+                    neoscroll.scroll(-0.1, { move_cursor = false, duration = 40 })
+                end,
+                ["<C-e>"] = function()
+                    neoscroll.scroll(0.1, { move_cursor = false, duration = 40 })
+                end,
+                ["zt"] = function()
+                    neoscroll.zt({ half_win_duration = 100 })
+                end,
+                ["zz"] = function()
+                    neoscroll.zz({ half_win_duration = 100 })
+                end,
+                ["zb"] = function()
+                    neoscroll.zb({ half_win_duration = 100 })
+                end,
             }
 
             neoscroll.setup({ mappings = { easing = "sine" } })
             for key, func in pairs(keymaps) do
                 set_keymap(modes, key, func)
             end
-        end
-    }
+        end,
+    },
 }
