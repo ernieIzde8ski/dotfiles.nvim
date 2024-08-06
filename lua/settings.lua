@@ -60,6 +60,12 @@ vim.opt.scrolloff = 5
 vim.opt.splitbelow = true
 vim.g.editorconfig = true
 
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+    callback = function()
+        set_keymap({ "n", "v" }, "q", vim.cmd.bd, true)
+    end,
+})
+
 vim.filetype.add({
     extension = {
         zsh = "sh",
