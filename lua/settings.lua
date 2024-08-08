@@ -76,6 +76,7 @@ vim.filetype.add({
         [".jsbeautifyrc"] = "json",
         [".zshrc"] = "sh",
         [".zshenv"] = "sh",
+        ["template"] = "bash",
     },
     pattern = {
         [".*.tmpl"] = "gotmpl",
