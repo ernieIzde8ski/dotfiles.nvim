@@ -1,5 +1,4 @@
 local has = vim.fn["has"]
-local set_keymap = require("helpers.set-keymap")
 
 -- confirm before destructive actions
 vim.opt.confirm = true
@@ -60,12 +59,6 @@ vim.opt.scrolloff = 5
 vim.opt.splitbelow = true
 vim.g.editorconfig = true
 
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
-    callback = function()
-        set_keymap({ "n", "v" }, "q", vim.cmd.bd, true)
-    end,
-})
-
 vim.filetype.add({
     extension = {
         zsh = "sh",
@@ -84,19 +77,3 @@ vim.filetype.add({
         [".*dot_zshenv"] = "sh",
     },
 })
-
--- close other buffers
-set_keymap("n", "<Leader>bd", "mc<cmd>wall | %bd | e# | bd#<cr>`c")
-
--- FOOT PEDAL.
-set_keymap({ "n", "v" }, "<F13>", vim.cmd.bprev)
-set_keymap("n", "<F14>", "<Leader>")
-set_keymap({ "n", "v" }, "<F15>", vim.cmd.bnext)
-
--- other keymaps
-set_keymap("n", "<C-B>", "Bi")
-set_keymap("i", "<C-B>", "<Esc>Bi")
-set_keymap("n", "<C-W>d", vim.diagnostic.open_float)
-set_keymap("n", "<Esc>", vim.cmd.nohlsearch)
-set_keymap("n", "<F5>", vim.cmd.update)
-set_keymap("n", "<F6>", "<cmd>!%:p<cr>") -- execute current file

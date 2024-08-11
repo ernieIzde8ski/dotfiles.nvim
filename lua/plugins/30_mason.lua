@@ -43,7 +43,7 @@ local server_configs = {
                 or util.find_git_ancestor(fname)
                 or util.find_package_json_ancestor(fname)
                 or util.find_node_modules_ancestor(fname)
-        end
+        end,
     },
     hls = {
         filetypes = { "haskell", "lhaskell", "cabal" },
@@ -99,7 +99,6 @@ return {
             null_ls.setup({
                 sources = {
                     null_ls.builtins.code_actions.gitrebase,
-                    null_ls.builtins.code_actions.gitsigns,
                     null_ls.builtins.formatting.prettierd,
                     null_ls.builtins.formatting.black,
                 },
