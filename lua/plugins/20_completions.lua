@@ -3,9 +3,13 @@ local source_buffer = { { "buffer" } }
 return {
     {
         "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-calc",
+            "hrsh7th/cmp-nvim-lsp",
+        },
         config = function()
             local cmp = require("cmp")
-
             cmp.setup({
                 snippet = {
                     expand = function(args)
@@ -27,8 +31,10 @@ return {
                 }),
 
                 sources = cmp.config.sources({
-                    { name = "nvim_lsp" },
+                    { name = "buffer" },
+                    { name = "calc" },
                     { name = "git" },
+                    { name = "nvim_lsp" },
                 }, source_buffer),
             })
         end,
@@ -37,18 +43,17 @@ return {
     {
         "petertriho/cmp-git",
         dependencies = {
+            "nvim-lua/plenary.nvim",
             "hrsh7th/nvim-cmp",
         },
         opts = {},
     },
 
-    { "hrsh7th/cmp-buffer" },
-
     {
         "hrsh7th/cmp-cmdline",
         dependencies = {
             "hrsh7th/nvim-cmp",
-            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
         },
         config = function()
             local cmp = require("cmp")
@@ -69,7 +74,4 @@ return {
             })
         end,
     },
-
-    { "hrsh7th/cmp-path", config = false },
-    { "hrsh7th/cmp-nvim-lsp", config = false },
 }
