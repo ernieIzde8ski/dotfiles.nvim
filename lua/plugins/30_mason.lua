@@ -33,39 +33,6 @@ local function on_lsp_attach(args)
     end
 end
 
--- all servers that use default capabilities
----@type { [string]: { filetypes?: string[], capabilities: any, settings: any } }
-local server_configs = {
-    biome = {
-        root_dir = function(fname)
-            local util = require("lspconfig.util")
-            return util.root_pattern("biome.json", "biome.jsonc")(fname)
-                or util.find_git_ancestor(fname)
-                or util.find_package_json_ancestor(fname)
-                or util.find_node_modules_ancestor(fname)
-        end,
-    },
-    hls = {
-        filetypes = { "haskell", "lhaskell", "cabal" },
-    },
-    lua_ls = {
-        settings = {
-            Lua = {
-                diagnostics = {
-                    globals = { "vim", "require" },
-                },
-                runtime = { version = "LuaJIT" },
-                workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true),
-                },
-            },
-        },
-    },
-    typst_lsp = {
-        settings = { exportPdf = "never" },
-    },
-}
-
 return {
     {
         "neovim/nvim-lspconfig",
@@ -137,6 +104,38 @@ return {
             local lspconfig = require("lspconfig")
             local mason_lspconfig = require("mason-lspconfig")
 
+            -- all servers that use default capabilities
+            ---@type { [string]: { filetypes?: string[], capabilities: any, settings: any } }
+            local server_configs = {
+                biome = {
+                    root_dir = function(fname)
+                        local util = require("lspconfig.util")
+                        return util.root_pattern("biome.json", "biome.jsonc")(fname)
+                            or util.find_git_ancestor(fname)
+                            or util.find_package_json_ancestor(fname)
+                            or util.find_node_modules_ancestor(fname)
+                    end,
+                },
+                hls = {
+                    filetypes = { "haskell", "lhaskell", "cabal" },
+                },
+                lua_ls = {
+                    settings = {
+                        Lua = {
+                            diagnostics = {
+                                globals = { "vim", "require" },
+                            },
+                            runtime = { version = "LuaJIT" },
+                            workspace = {
+                                library = vim.api.nvim_get_runtime_file("", true),
+                            },
+                        },
+                    },
+                },
+                typst_lsp = {
+                    settings = { exportPdf = "never" },
+                },
+            }
             mason_lspconfig.setup({
                 ensure_installed = {
                     "gopls",
