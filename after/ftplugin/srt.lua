@@ -1,6 +1,3 @@
-vim.opt_local.shiftwidth = 2
-vim.opt_local.tabstop = 2
-
 vim.opt_local.colorcolumn = "40,75,80"
 
 local set_keymap = require("helpers.set-keymap")

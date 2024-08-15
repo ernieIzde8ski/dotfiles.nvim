@@ -1,4 +1,6 @@
 local has = vim.fn["has"]
+local set = require("helpers.set")
+local set_keymap = require("helpers.set-keymap")
 
 vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
     callback = function()
@@ -75,6 +77,8 @@ vim.opt.scrolloff = 5
 vim.opt.splitbelow = true
 vim.g.editorconfig = true
 
+-- setting filetypes & filetype-based indentation
+
 vim.filetype.add({
     extension = {
         zsh = "sh",
@@ -92,4 +96,34 @@ vim.filetype.add({
         [".*dot_zshrc"] = "sh", -- chezmoi dotfile format
         [".*dot_zshenv"] = "sh",
     },
+})
+
+local half_indent_fts = set.new({
+    "fstab",
+    "gitcommit",
+    "haskell",
+    "html",
+    "markdown",
+    "pug",
+    "srt",
+    "typst",
+})
+
+local quick_close_fts = set.new({
+    "help",
+    "sh",
+    "qf",
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    callback = function(ev)
+        if half_indent_fts[ev.match] then
+            vim.opt_local.shiftwidth = 2
+            vim.opt_local.tabstop = 2
+        end
+
+        if quick_close_fts[ev.match] then
+            set_keymap({ "n", "v" }, "q", vim.cmd.bd, true)
+        end
+    end,
 })
