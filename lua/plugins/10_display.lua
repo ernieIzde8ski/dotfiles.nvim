@@ -35,6 +35,10 @@ return {
         end,
     },
 
+    {
+        "https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git",
+    },
+
     -- netrw replacement
     {
         "nvim-tree/nvim-tree.lua",
