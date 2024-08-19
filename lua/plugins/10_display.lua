@@ -1,5 +1,6 @@
 local set_keymap = require("helpers.set-keymap")
 
+---@type LazyPluginSpec[]
 return {
     -- treesitter
     {
@@ -37,6 +38,22 @@ return {
 
     {
         "https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git",
+    },
+
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        ---@module "ibl"
+        ---@type ibl.config
+        opts = {
+            indent = {
+                char = "▏",
+            },
+            scope = {
+                enabled = true,
+                char = "▏",
+            },
+        },
     },
 
     -- netrw replacement
