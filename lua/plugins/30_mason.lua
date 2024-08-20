@@ -105,11 +105,12 @@ return {
             local mason_lspconfig = require("mason-lspconfig")
 
             -- all servers that use default capabilities
-            ---@type { [string]: { filetypes?: string[], capabilities: any, settings: any } }
+            ---@type { [string]:  lspconfig.Config }
             local server_configs = {
                 biome = {
                     root_dir = function(fname)
                         local util = require("lspconfig.util")
+                        ---@diagnostic disable-next-line: redundant-return-value
                         return util.root_pattern("biome.json", "biome.jsonc")(fname)
                             or util.find_git_ancestor(fname)
                             or util.find_package_json_ancestor(fname)
@@ -117,6 +118,7 @@ return {
                     end,
                 },
                 hls = {
+                    ---@type lspconfig.Config
                     filetypes = { "haskell", "lhaskell", "cabal" },
                 },
                 lua_ls = {
@@ -141,7 +143,7 @@ return {
                     "gopls",
                     "jsonls",
                     "lua_ls",
-                    "pyright",
+                    "basedpyright",
                     "rust_analyzer",
                     "tsserver",
                 },
