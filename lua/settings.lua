@@ -115,7 +115,17 @@ local quick_close_fts = set.new({
     "qf",
 })
 
+---Copied directly from the docs lmao
+---@class autocmd_callback_event
+---@field id number autocommand id
+---@field group? string autocommand group id, if any
+---@field match string expanded value of <amatch>
+---@field buf number expanded value of <abuf>
+---@field file string expanded value of <afile>
+---@field data any arbitrary data passed from `nvim_exec_autocmds()`
+
 vim.api.nvim_create_autocmd({ "FileType" }, {
+    ---@type fun(ev:autocmd_callback_event)
     callback = function(ev)
         if half_indent_fts[ev.match] then
             vim.opt_local.shiftwidth = 2
