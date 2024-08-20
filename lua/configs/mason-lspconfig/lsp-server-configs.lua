@@ -20,19 +20,27 @@ return {
     hls = {
         filetypes = { "haskell", "lhaskell", "cabal" },
     },
+
     lua_ls = {
+        on_init = function(client, initialize_result)
+            client.config.settings.Lua =
+                vim.tbl_deep_extend("force", client.config.settings.Lua, {
+                    workspace = {
+                        checkThirdParty = false,
+                        library = vim.api.nvim_get_runtime_file("", true),
+                    },
+                })
+        end,
         settings = {
             Lua = {
                 diagnostics = {
                     globals = { "vim", "require" },
                 },
                 runtime = { version = "LuaJIT" },
-                workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true),
-                },
             },
         },
     },
+
     rust_analyzer = {
         settings = {
             ["rust-analyzer"] = {
