@@ -1,11 +1,14 @@
 local set_keymap = require("helpers.set-keymap")
 
+---@type LazyPluginSpec[]
 return {
     {
         "tpope/vim-fugitive",
         config = function()
+            set_keymap("n", "<Leader>ga", ":Git add -N -- %")
+            set_keymap("n", "<Leader>gA", ":Git add -- %")
             set_keymap("n", "<Leader>gcc", ":Git commit")
-            set_keymap("n", "<Leader>gcc", ":Git commit --patch")
+            set_keymap("n", "<Leader>gcp", ":Git commit --patch")
         end,
     },
 

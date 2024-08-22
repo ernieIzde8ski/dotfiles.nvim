@@ -1,39 +1,11 @@
-local set_keymap = require("helpers.set-keymap")
-
 ---@type LazyPluginSpec[]
 return {
-    -- treesitter
+    -- syntax highlighting
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        config = function()
-            ---@diagnostic disable-next-line: missing-fields
-            require("nvim-treesitter.configs").setup({
-                auto_install = true,
-                ensure_installed = {
-                    "diff",
-                    "gitignore",
-                    "gitcommit",
-                    "gotmpl",
-                    "haskell",
-                    "ini",
-                    "javascript",
-                    "json",
-                    "jsonc",
-                    "lua",
-                    "markdown",
-                    "python",
-                    "rust",
-                    "toml",
-                    "typescript",
-                    "typst",
-                    "vimdoc",
-                    "yaml",
-                },
-                highlight = { enable = true },
-                indent = { enable = true },
-            })
-        end,
+        main = "nvim-treesitter.configs",
+        opts = require("configs.nvim-treesitter"),
     },
 
     {
@@ -43,42 +15,14 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        ---@module "ibl"
-        ---@type ibl.config
-        opts = {
-            indent = {
-                char = "▏",
-            },
-            scope = {
-                enabled = true,
-                char = "▏",
-            },
-        },
+        opts = require("configs.indent-blankline"),
     },
 
     -- netrw replacement
     {
         "nvim-tree/nvim-tree.lua",
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            vim.g.loaded_netrw = 1
-            vim.g.loaded_netrwPlugin = 1
-
-            require("nvim-tree").setup({
-                hijack_cursor = true,
-                diagnostics = {
-                    enable = true,
-                },
-                actions = {
-                    open_file = {
-                        quit_on_open = not vim.g.keep_tree_open,
-                    },
-                },
-            })
-
-            local api = require("nvim-tree.api")
-            set_keymap({ "n", "v" }, "<F3>", api.tree.toggle)
-        end,
+        config = require("configs.nvim-tree"),
     },
 
     {

@@ -1,5 +1,6 @@
 local source_buffer = { { "buffer" } }
 
+---@type LazyPluginSpec[]
 return {
     {
         "hrsh7th/nvim-cmp",
