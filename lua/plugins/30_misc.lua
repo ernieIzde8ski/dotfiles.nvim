@@ -4,8 +4,9 @@ return {
     { "tpope/vim-surround" },
 
     {
-        "m4xshen/autoclose.nvim",
-        opts = require("configs.autoclose"),
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = require("configs.c_nvim_autopairs"),
     },
 
     {
