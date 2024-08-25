@@ -38,14 +38,56 @@ set_keymap("n", "<F14>", "<Leader>")
 set_keymap({ "n", "v" }, "<F15>", vim.cmd.bnext)
 
 -- other keymaps
-set_keymap("n", "<C-B>", "Bi")
-set_keymap("i", "<C-B>", "<C-O>B")
+set_keymap({ "n", "v" }, "dD", "0D")
 set_keymap("n", "<C-W>d", vim.diagnostic.open_float)
 set_keymap("n", "<Esc>", vim.cmd.nohlsearch)
 set_keymap("n", "<F5>", vim.cmd.update)
-set_keymap("n", "<F6>", "<cmd>!%:p<cr>") -- execute current file
 set_keymap({ "n", "v" }, "gm", "gM")
 set_keymap({ "n", "v" }, "gM", "gm")
+
+---@type { [string]: string }
+vim.g.shell_providers = {
+    python = "!python3",
+    javascript = "!node",
+    typescript = "!npx ts-node",
+    lua = "so",
+}
+
+local function execute_current_file()
+    local vim_command
+
+    -- checking for a shebang
+    if string.match(vim.fn.getline(1), "^#!") then
+        local fp = vim.fn.expand("%")
+        if vim.fn.getfperm(fp):sub(3, 3) == "x" then
+            -- execute full path to file
+            vim_command = "!%:p"
+        else
+            vim.notify(
+                "'" .. fp .. "' contains a shebang, but is not executable",
+                vim.log.levels.ERROR
+            )
+            return
+        end
+    elseif vim.g.shell_providers[vim.bo.filetype] ~= nil then
+        vim_command = vim.g.shell_providers[vim.bo.filetype] .. " %"
+    else
+        vim.notify(
+            "File is not executable and does not have an associated shell provider. Set a shell provider for this filetype in `vim.g.providers`.",
+            vim.log.levels.ERROR
+        )
+        return
+    end
+
+    vim.notify(
+        "Executing file with arguments: '" .. vim_command .. "'",
+        vim.log.levels.DEBUG
+    )
+
+    vim.cmd(vim_command)
+end
+
+set_keymap("n", "<F6>", execute_current_file) -- execute current file
 
 ---jump with `key` to snippet in `direction`, if available
 ---@param key string
