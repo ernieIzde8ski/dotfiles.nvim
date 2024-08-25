@@ -1,18 +1,6 @@
 ---@type LazyPluginSpec[]
 return {
-    {
-        "neovim/nvim-lspconfig",
-        dependencies = {
-            "mrded/nvim-lsp-notify",
-            "felpafel/inlay-hint.nvim",
-        },
-        config = require("configs.nvim-lspconfig"),
-    },
-
-    {
-        "williamboman/mason.nvim",
-        opts = require("configs.mason"),
-    },
+    require("configs.p_mason"),
 
     {
         "nvimtools/none-ls.nvim",
@@ -32,10 +20,20 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         dependencies = {
+            "rcarriga/nvim-notify",
             "williamboman/mason.nvim",
-            "neovim/nvim-lspconfig",
             "hrsh7th/cmp-nvim-lsp",
         },
-        config = require("configs.mason-lspconfig"),
+        config = require("configs.c_mason-lspconfig"),
+    },
+
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            "williamboman/mason-lspconfig.nvim",
+            "mrded/nvim-lsp-notify",
+            "felpafel/inlay-hint.nvim",
+        },
+        config = require("configs.nvim-lspconfig"),
     },
 }

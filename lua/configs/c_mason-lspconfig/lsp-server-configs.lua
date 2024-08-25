@@ -17,6 +17,7 @@ return {
                 or util.find_node_modules_ancestor(fname)
         end,
     },
+
     hls = {
         filetypes = { "haskell", "lhaskell", "cabal" },
     },
@@ -54,8 +55,5 @@ return {
                 procMacro = { enable = true },
             },
         },
-    },
-    typst_lsp = {
-        settings = { exportPdf = "never" },
     },
 }

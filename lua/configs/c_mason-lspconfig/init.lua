@@ -1,19 +1,23 @@
+local mlc_opts = {
+    package_names = {
+        "basedpyright",
+        "gopls",
+        "hls",
+        "jsonls",
+        "lua_ls",
+        "rust_analyzer",
+        "tinymist",
+        "tsserver",
+    },
+}
 return function()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
     local lspconfig = require("lspconfig")
     local mason_lspconfig = require("mason-lspconfig")
-    local server_configs = require("configs.mason-lspconfig.lsp-server-configs")
+    local server_configs = require("configs.c_mason-lspconfig.lsp-server-configs")
+    local mlc_deferred = require("configs.c_mason-lspconfig.deferred-install")
 
-    mason_lspconfig.setup({
-        ensure_installed = {
-            "gopls",
-            "jsonls",
-            "lua_ls",
-            "basedpyright",
-            "rust_analyzer",
-            "tsserver",
-        },
-    })
+    mason_lspconfig.setup({})
 
     mason_lspconfig.setup_handlers({
         function(server_name)
@@ -31,4 +35,6 @@ return function()
             lspconfig.rust_analyzer.setup(server_configs["rust_analyzer"])
         end,
     })
+
+    mlc_deferred.setup(mlc_opts)
 end

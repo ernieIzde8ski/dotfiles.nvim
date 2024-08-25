@@ -10,4 +10,7 @@ my neovim configs;
 
 ## development
 
-`pre-commit` requires `python3`
+`pre-commit` requires `python3`. Because of
+[an open issue in pre-commit](https://github.com/pre-commit/pre-commit/issues/3230),
+it is currently necessary to manually install stylua:
+`cargo install stylua --features lua52`
