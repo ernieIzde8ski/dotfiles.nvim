@@ -1,8 +1,30 @@
 local has = vim.fn["has"]
 
-local filetypes = require("settings.filetypes")
+require("settings.filetypes").setup()
 
-filetypes.setup()
+-- make sure that the UI fills up the *entire* terminal window.
+-- purportedly this can be done in my wezterm config, but it's easy to
+-- do it here instead
+
+local augroup_ui = vim.api.nvim_create_augroup("fullsize_terminal_ui", {})
+
+vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
+    group = augroup_ui,
+    callback = function()
+        local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+        if not normal.bg then
+            return
+        end
+        io.write(string.format("\027]11;#%06x\027\\", normal.bg))
+    end,
+})
+
+vim.api.nvim_create_autocmd("UILeave", {
+    group = augroup_ui,
+    callback = function()
+        io.write("\027]111\027\\")
+    end,
+})
 
 -- confirm before destructive actions
 vim.opt.confirm = true
@@ -31,7 +53,7 @@ vim.opt.shiftwidth = 4
 vim.opt.shiftround = true
 vim.opt.smartindent = true
 
--- set vim.opt
+-- I think this is legacy tbh
 if has("termguicolors") then
     vim.opt.termguicolors = true
 end
