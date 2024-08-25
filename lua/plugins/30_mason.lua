@@ -4,16 +4,16 @@ return {
 
     {
         "nvimtools/none-ls.nvim",
-        dependencies = { "williamboman/mason.nvim" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            "jay-babu/mason-null-ls.nvim",
+        },
         config = require("configs.none-ls"),
     },
 
     {
         "jay-babu/mason-null-ls.nvim",
-        dependencies = {
-            "williamboman/mason.nvim",
-            "nvimtools/none-ls.nvim",
-        },
+        dependencies = { "williamboman/mason.nvim" },
         opts = require("configs.mason-null-ls"),
     },
 

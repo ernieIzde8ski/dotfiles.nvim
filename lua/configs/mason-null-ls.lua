@@ -1,7 +1,7 @@
 ---@type MasonNullLsSettings
 return {
-    automatic_installation = true,
-    ensure_installed = { "prettierd", "black" },
+    automatic_installation = false,
+    ensure_installed = { "black", "isort", "clang-format", "stylua", "prettierd" },
     methods = {
         code_actions = true,
         formatting = true,
@@ -9,4 +9,5 @@ return {
         diagnostics = false,
         hover = false,
     },
+    handlers = {},
 }
