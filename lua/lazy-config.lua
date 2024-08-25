@@ -28,12 +28,18 @@ vim.opt.rtp:prepend(lazy_path)
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"
 
-local weekday = os.date("*t").wday
+local function is_weekend()
+    local wday = os.date("*t").wday
+    return wday == 1 or wday == 7
+end
 
 require("lazy").setup({
     spec = { import = "plugins" },
     checker = {
         -- I'm only allowed to edit my neovim configs on the weekend
-        enabled = weekday == 1 or weekday == 7,
+        enabled = is_weekend(),
+    },
+    change_detection = {
+        notify = false,
     },
 })
