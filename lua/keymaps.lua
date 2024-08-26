@@ -38,7 +38,7 @@ set_keymap("n", "<F14>", "<Leader>")
 set_keymap({ "n", "v" }, "<F15>", vim.cmd.bnext)
 
 -- other keymaps
-set_keymap({ "n", "v" }, "dD", "0D")
+set_keymap("n", "dD", "0D")
 set_keymap("n", "<C-W>d", vim.diagnostic.open_float)
 set_keymap("n", "<Esc>", vim.cmd.nohlsearch)
 set_keymap("n", "<F5>", vim.cmd.update)
