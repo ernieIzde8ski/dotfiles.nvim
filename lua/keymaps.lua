@@ -73,7 +73,7 @@ local function execute_current_file()
         vim_command = vim.g.shell_providers[vim.bo.filetype] .. " %"
     else
         vim.notify(
-            "File is not executable and does not have an associated shell provider. Set a shell provider for this filetype in `vim.g.providers`.",
+            "File is not executable and does not have an associated shell provider. Set a shell provider for this filetype in `vim.g.shell_providers`.",
             vim.log.levels.ERROR
         )
         return
