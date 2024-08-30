@@ -1,5 +1,3 @@
-local has = vim.fn["has"]
-
 require("settings.filetypes").setup()
 
 -- make sure that the UI fills up the *entire* terminal window.
@@ -52,24 +50,6 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.shiftround = true
 vim.opt.smartindent = true
-
--- I think this is legacy tbh
-if has("termguicolors") then
-    vim.opt.termguicolors = true
-end
-
--- make floating displays have borders
-local float_border = { border = "single" }
-
-vim.lsp.handlers["textDocument/hover"] =
-    vim.lsp.with(vim.lsp.handlers.hover, float_border)
-
-vim.lsp.handlers["textDocument/signatureHelp"] =
-    vim.lsp.with(vim.lsp.handlers.signature_help, float_border)
-
-vim.diagnostic.config({
-    float = float_border,
-})
 
 -- ripgrep
 if vim.fn.executable("rg") ~= 0 then

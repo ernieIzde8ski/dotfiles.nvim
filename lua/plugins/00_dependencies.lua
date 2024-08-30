@@ -4,7 +4,7 @@ return {
         "rebelot/kanagawa.nvim",
         priority = 1000,
         lazy = false,
-        config = require("configs.kanagawa"),
+        config = require("configs.c_kanagawa"),
     },
 
     {
