@@ -24,8 +24,5 @@ return {
         opts = {},
     },
 
-    {
-        "karb94/neoscroll.nvim",
-        config = require("configs.neoscroll"),
-    },
+    require("configs.p_neoscroll"),
 }
