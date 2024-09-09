@@ -7,7 +7,7 @@ local mlc_opts = {
         "lua_ls",
         "rust_analyzer",
         "tinymist",
-        "tsserver",
+        "ts_ls",
     },
 }
 return function()
