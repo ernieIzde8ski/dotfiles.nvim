@@ -14,7 +14,7 @@ return {
     {
         "jay-babu/mason-null-ls.nvim",
         dependencies = { "williamboman/mason.nvim" },
-        opts = require("configs.mason-null-ls"),
+        opts = require("configs.o_mason-null-ls"),
     },
 
     {
