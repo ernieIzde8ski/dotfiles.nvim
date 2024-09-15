@@ -44,6 +44,7 @@ set_keymap("n", "<Esc>", vim.cmd.nohlsearch)
 set_keymap("n", "<F5>", vim.cmd.update)
 set_keymap({ "n", "v" }, "gm", "gM")
 set_keymap({ "n", "v" }, "gM", "gm")
+set_keymap({ "n", "v" }, "/", "/\\v")
 
 ---@type { [string]: string }
 vim.g.shell_providers = {
