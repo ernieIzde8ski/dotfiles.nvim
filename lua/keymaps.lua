@@ -7,8 +7,9 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
 })
 
 -- local notify = require("notify")
-local write_all_buffers = vim.cmd.wall
 local close_buffer = vim.cmd.bd
+local update_buffer = vim.cmd.update
+local write_all_buffers = vim.cmd.wall
 
 local function close_other_buffers()
     write_all_buffers()
@@ -41,7 +42,7 @@ set_keymap({ "n", "v" }, "<F15>", vim.cmd.bnext)
 set_keymap("n", "dD", "0D")
 set_keymap("n", "<C-W>d", vim.diagnostic.open_float)
 set_keymap("n", "<Esc>", vim.cmd.nohlsearch)
-set_keymap("n", "<F5>", vim.cmd.update)
+set_keymap("n", "<F5>", update_buffer)
 set_keymap({ "n", "v" }, "gm", "gM")
 set_keymap({ "n", "v" }, "gM", "gm")
 set_keymap({ "n", "v" }, "/", "/\\v")
@@ -55,6 +56,8 @@ vim.g.shell_providers = {
 }
 
 local function execute_current_file()
+    update_buffer()
+
     local vim_command
 
     -- checking for a shebang

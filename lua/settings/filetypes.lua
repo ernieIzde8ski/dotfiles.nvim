@@ -5,6 +5,58 @@ local set_keymap = require("helpers.set-keymap")
 
 ----- FILETYPES -----
 
+---Finds the index of the next result before the pattern.
+---If not available, returns the end of the line.
+---@param line string
+---@param pattern string
+---@return number
+local function find_next_or_end(line, pattern)
+    local res = line:find(pattern)
+    if res then
+        return res - 1
+    else
+        return #line
+    end
+end
+
+---Returns the name of the executable at the top of the file, if available.
+---@param line string
+---@return string | nil
+local function parse_shebang_from_line(line)
+    if line:sub(1, 2) ~= "#!" or #line < 4 then
+        return
+    end
+
+    line = vim.trim(line)
+    local first_word_end = find_next_or_end(line, " ")
+    local first_word = line:sub(3, first_word_end)
+    first_word = first_word:reverse()
+    first_word = first_word:sub(1, find_next_or_end(first_word, "/")):reverse()
+
+    if #first_word == 0 then
+        return nil
+    elseif first_word ~= "env" then
+        return first_word
+    end
+
+    local second_word_start = first_word_end + 2
+    if second_word_start > #line then
+        return nil
+    end
+
+    local next_word = vim.trim(line:sub(second_word_start))
+    local next_word_end = find_next_or_end(next_word, " ")
+    -- fix "#!/usr/bin/env -S ..."
+    if vim.trim(next_word:sub(1, next_word_end)) == "-S" then
+        next_word = vim.trim(next_word:sub(next_word_end + 1))
+    end
+    next_word = vim.trim(next_word:sub(1, find_next_or_end(next_word, " ")))
+
+    if #next_word then
+        return next_word
+    end
+end
+
 ---@type vim.filetype.add.filetypes
 local filetype_additions = {
     extension = {
@@ -19,9 +71,23 @@ local filetype_additions = {
         ["template"] = "bash", -- void-packages
     },
     pattern = {
+        [".*"] = function(_, bufnr)
+            if vim.fn.executable("rg") == 0 then
+                return
+            end
+
+            local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, true)[1]
+            local shebang = parse_shebang_from_line(first_line)
+            if shebang == nil then
+                return
+            end
+            vim.notify("shebang found: " .. shebang)
+            if shebang == "xonsh" then
+                return shebang
+            end
+        end,
         [".*.tmpl"] = "gotmpl",
-        [".*dot_zshrc"] = "sh", -- chezmoi dotfile format
-        [".*dot_zshenv"] = "sh",
+        [".*dot_(zshrc|zshenv)"] = "sh", -- chezmoi dotfile format
     },
 }
 
