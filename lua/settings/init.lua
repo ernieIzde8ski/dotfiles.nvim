@@ -53,7 +53,7 @@ vim.opt.smartindent = true
 
 -- ripgrep
 if vim.fn.executable("rg") ~= 0 then
-    vim.opt.grepprg = "rg --vimgrep"
+    vim.opt.grepprg = "rg --vimgrep --pcre2"
 end
 
 -- smartcasing in search patterns
