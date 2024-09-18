@@ -1,8 +1,8 @@
 return function()
-    if os.getenv("IS_WORK_MACHINE") == "true" then
-        vim.o.background = "light"
-    else
+    if os.getenv("DARK_MODE") == "true" then
         vim.o.background = "dark"
+    else
+        vim.o.background = "light"
     end
 
     -- I think this is legacy tbh
