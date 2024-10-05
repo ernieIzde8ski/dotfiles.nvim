@@ -3,8 +3,8 @@ return {
     automatic_installation = false,
     ensure_installed = {
         -- formatters
-        "black",
         "isort",
+        "ruff_format",
         "clang-format",
         "prettierd",
         "stylua",
