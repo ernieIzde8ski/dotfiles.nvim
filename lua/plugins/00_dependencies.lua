@@ -8,14 +8,16 @@ return {
     },
 
     {
-        "rcarriga/nvim-notify",
-        lazy = true,
-        config = require("configs.nvim-notify"),
+        "j-hui/fidget.nvim",
+        tag = "v1.4.5",
+        opts = {
+            notification = { override_vim_notify = true },
+        },
     },
 
     {
         "klen/nvim-config-local",
-        dependencies = { "rcarriga/nvim-notify" },
+        dependencies = { "j-hui/fidget.nvim" },
         opts = { lookup_parents = true },
     },
 

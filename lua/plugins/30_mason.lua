@@ -20,7 +20,7 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         dependencies = {
-            "rcarriga/nvim-notify",
+            "j-hui/fidget.nvim",
             "williamboman/mason.nvim",
             "hrsh7th/cmp-nvim-lsp",
         },
@@ -31,7 +31,7 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
-            "mrded/nvim-lsp-notify",
+            "j-hui/fidget.nvim",
             "felpafel/inlay-hint.nvim",
         },
         config = require("configs.nvim-lspconfig"),

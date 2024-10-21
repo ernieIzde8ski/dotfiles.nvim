@@ -34,13 +34,6 @@ return {
         opts = {},
     },
 
-    -- LSP display
-    {
-        "mrded/nvim-lsp-notify",
-        dependencies = { "rcarriga/nvim-notify" },
-        config = true,
-    },
-
     {
         "felpafel/inlay-hint.nvim",
         config = true,
