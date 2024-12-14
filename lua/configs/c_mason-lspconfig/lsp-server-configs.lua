@@ -10,11 +10,12 @@ return {
     biome = {
         root_dir = function(fname)
             local util = require("lspconfig.util")
+            local fs = require("helpers.fs")
             ---@diagnostic disable-next-line: redundant-return-value
             return util.root_pattern("biome.json", "biome.jsonc")(fname)
                 or util.find_git_ancestor(fname)
-                or util.find_package_json_ancestor(fname)
-                or util.find_node_modules_ancestor(fname)
+                or fs:find_root("package.json", fname)
+                or fs:find_root("node_modules", fname)
         end,
     },
 
@@ -23,6 +24,7 @@ return {
     },
 
     lua_ls = {
+        ---@diagnostic disable-next-line: unused-local
         on_init = function(client, initialize_result)
             client.config.settings.Lua =
                 vim.tbl_deep_extend("force", client.config.settings.Lua, {

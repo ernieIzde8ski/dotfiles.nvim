@@ -1,7 +1,5 @@
 ---@alias PackageNameToFiletypes {[string]: string[]}
 
----@type notify.Options
----@diagnostic disable-next-line: missing-fields
 local _notify_opts = { title = "mason.nvim (config)" }
 local _levels = vim.log.levels
 local logger = {
