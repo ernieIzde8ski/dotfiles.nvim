@@ -1,13 +1,16 @@
 local set_keymap = require("helpers.set-keymap")
 
+local group_name = "dotfiles_LSPAttach"
+
 ---@type { [string]: string }
 local lsp_keymaps = {
     ["<Leader>a"] = "code_action",
     ["<Leader>f"] = "format",
+    ["<Leader>gt"] = "typehierarchy",
     ["<F2>"] = "rename",
     ["K"] = "hover",
-    ["g<C-d>"] = "type_definition",
-    ["gD"] = "declaration",
+    ["g<C-d>"] = "declaration",
+    ["gD"] = "type_definition",
     ["gd"] = "definition",
     ["gr"] = "references",
 }
@@ -34,6 +37,7 @@ local function callback(args)
 end
 
 return function()
-    local opts = { callback = callback }
+    local opts = { callback = callback, group = group_name }
+    vim.api.nvim_create_augroup(group_name, {})
     vim.api.nvim_create_autocmd("LspAttach", opts)
 end

@@ -1,4 +1,5 @@
 local set_keymap = require("helpers.set-keymap")
+
 return function()
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1

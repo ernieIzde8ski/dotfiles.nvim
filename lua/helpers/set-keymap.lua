@@ -15,7 +15,7 @@ local function set_keymap(mode, key, map, bufnr)
         return
     end
 
-    ---@type { noremap: boolean, silent: boolean, callback?: function }
+    ---@type vim.api.keyset.keymap
     local opts = { noremap = true, silent = true }
     if type(map) == "function" then
         opts.callback = map
