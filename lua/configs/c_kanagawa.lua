@@ -1,7 +1,8 @@
 return function()
-    if os.getenv("DARK_MODE") == "true" then
+    local is_dark_mode = os.getenv("DARK_MODE")
+    if is_dark_mode == nil or is_dark_mode == "true" then
         vim.o.background = "dark"
-    else
+    elseif is_dark_mode == "false" then
         vim.o.background = "light"
     end
 
