@@ -23,5 +23,4 @@ function M:find_root(ancestor, start_path)
     end
 end
 
-
 return M

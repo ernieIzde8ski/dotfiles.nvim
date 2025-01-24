@@ -111,8 +111,6 @@ local augroup_hook_name = "MasonRegistryFiletypeHook"
 local function create_autocmd_callback(filetype_to_package_names)
     -- TODO: maybe refactor? we could use the `mason-registry` api and install plugins less synchronously
 
-    local registry = require("mason-registry")
-
     ---@type fun(ev:autocmd_callback_event)
     local function inner(ev)
         if filetype_to_package_names[ev.match] == nil then
@@ -131,6 +129,7 @@ local function create_autocmd_callback(filetype_to_package_names)
             logger.debug("Unregistered " .. augroup_hook_name .. " augroup")
         end
     end
+
     return inner
 end
 

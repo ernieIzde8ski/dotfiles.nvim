@@ -13,7 +13,7 @@ return {
             local fs = require("helpers.fs")
             ---@diagnostic disable-next-line: redundant-return-value
             return util.root_pattern("biome.json", "biome.jsonc")(fname)
-                or util.find_git_ancestor(fname)
+                or fs:find_root(".git", fname)
                 or fs:find_root("package.json", fname)
                 or fs:find_root("node_modules", fname)
         end,
@@ -56,6 +56,13 @@ return {
                 },
                 procMacro = { enable = true },
             },
+        },
+    },
+
+    tinymist = {
+        settings = {
+            formatterMode = "typstyle",
+            exportPdf = "onDocumentHasTitle",
         },
     },
 }

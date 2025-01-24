@@ -1,2 +1,3 @@
 column_width = 90
 indent_type = "Spaces"
+syntax = "Lua52"
