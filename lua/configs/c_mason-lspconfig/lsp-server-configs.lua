@@ -4,18 +4,19 @@ if success == false then
     error("Cannot build LSP configs before mason-lspconfig is available!")
 end
 
+local fs = require("helpers.fs")
+
 ---All servers that use default capabilities
 ---@type { [string]:  lspconfig.Config }
 return {
     biome = {
-        root_dir = function(fname)
+        root_dir = function(filename)
             local util = require("lspconfig.util")
-            local fs = require("helpers.fs")
             ---@diagnostic disable-next-line: redundant-return-value
-            return util.root_pattern("biome.json", "biome.jsonc")(fname)
-                or fs:find_root(".git", fname)
-                or fs:find_root("package.json", fname)
-                or fs:find_root("node_modules", fname)
+            return util.root_pattern("biome.json", "biome.jsonc")(filename)
+                or fs:find_root(".git", filename)
+                or fs:find_root("package.json", filename)
+                or fs:find_root("node_modules", filename)
         end,
     },
 
@@ -64,5 +65,12 @@ return {
             formatterMode = "typstyle",
             exportPdf = "onDocumentHasTitle",
         },
+        root_dir = function(filename)
+            local util = require("lspconfig.util")
+            ---@diagnostic disable-next-line: redundant-return-value
+            return util.root_pattern(".typst_root", ".typst-root")(filename)
+                or fs:find_root(".git", filename)
+                or fs:find_root("Cargo.toml", filename)
+        end,
     },
 }
