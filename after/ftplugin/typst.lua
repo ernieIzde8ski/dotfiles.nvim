@@ -31,3 +31,4 @@ local function compile_file()
 end
 
 set_keymap({ "n", "v" }, "<F6>", compile_file, true)
+vim.opt_local.conceallevel = 2

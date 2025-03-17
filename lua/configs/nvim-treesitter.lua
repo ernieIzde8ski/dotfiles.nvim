@@ -21,6 +21,9 @@ return {
         "vimdoc",
         "yaml",
     },
-    highlight = { enable = true },
+    highlight = {
+        enable = true,
+        disable = { "typst" },
+    },
     indent = { enable = true },
 }

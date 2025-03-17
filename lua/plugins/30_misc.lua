@@ -30,5 +30,10 @@ return {
         opts = {}, -- lazy.nvim will implicitly calls `setup {}`
     },
 
+    {
+        "MrPicklePinosaur/typst-conceal.vim",
+        ft = "typst",
+    },
+
     require("configs.p_neoscroll"),
 }
