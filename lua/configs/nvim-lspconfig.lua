@@ -40,4 +40,52 @@ return function()
     local opts = { callback = callback, group = group_name }
     vim.api.nvim_create_augroup(group_name, {})
     vim.api.nvim_create_autocmd("LspAttach", opts)
+
+    local lspconfig = vim.lsp.config
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+    lspconfig("*", {
+        root_markers = { ".git" },
+        capabilities = capabilities,
+    })
+
+    lspconfig("biome", {
+        root_markers = { "biome.json", "biome.jsonc", "package.json", "node_modules" },
+    })
+    lspconfig("hls", { filetypes = { "haskell", "lhaskell", "cabal" } })
+    lspconfig("lua_ls", {
+        ---@diagnostic disable-next-line: unused-local
+        on_init = function(client, initialize_result)
+            client.config.settings.Lua =
+                vim.tbl_deep_extend("force", client.config.settings.Lua, {
+                    workspace = {
+                        checkThirdParty = false,
+                        library = vim.api.nvim_get_runtime_file("", true),
+                    },
+                })
+        end,
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { "vim", "require" },
+                },
+                runtime = { version = "LuaJIT" },
+            },
+        },
+    })
+
+    lspconfig("rust_analyzer", {
+        settings = {
+            ["rust-analyzer"] = {
+                imports = {
+                    granularity = { group = "module" },
+                    prefix = "self",
+                },
+                cargo = {
+                    buildScripts = { enable = true },
+                },
+                procMacro = { enable = true },
+            },
+        },
+    })
 end
