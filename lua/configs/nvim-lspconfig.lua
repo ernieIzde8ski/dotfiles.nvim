@@ -49,10 +49,20 @@ return function()
         capabilities = capabilities,
     })
 
-    lspconfig("biome", {
-        root_markers = { "biome.json", "biome.jsonc", "package.json", "node_modules" },
+    lspconfig("basedpyright", {
+        root_markers = { { "pyproject.toml" }, ".git" },
     })
+
+    lspconfig("biome", {
+        root_markers = {
+            { "biome.json", "biome.jsonc" },
+            { "package.json", "node_modules" },
+            ".git",
+        },
+    })
+
     lspconfig("hls", { filetypes = { "haskell", "lhaskell", "cabal" } })
+
     lspconfig("lua_ls", {
         ---@diagnostic disable-next-line: unused-local
         on_init = function(client, initialize_result)
@@ -72,6 +82,10 @@ return function()
                 runtime = { version = "LuaJIT" },
             },
         },
+    })
+
+    lspconfig("stylua", {
+        root_markers = { ".stylua.toml", ".git" },
     })
 
     lspconfig("rust_analyzer", {
