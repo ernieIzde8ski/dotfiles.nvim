@@ -26,29 +26,7 @@ return function()
     })
 
     require("kanagawa").setup({
-        transparent = true,
-        colors = {
-            theme = {
-                all = {
-                    ui = {
-                        float = { bg = "none", bg_border = "none" },
-                        bg_gutter = "none",
-                    },
-                },
-            },
-        },
-        overrides = function(colors)
-            local theme = colors.theme
-            return {
-                -- use kanagawa colors in these popup windows
-                -- NormalFloat = { bg = "none" },
-                -- FloatBorder = { bg = "none" },
-                -- FloatTitle = { bg = "none" },
-                NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
-                LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-                MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-            }
-        end,
+        -- transparent = true,
     })
 
     vim.cmd.colorscheme("kanagawa")
