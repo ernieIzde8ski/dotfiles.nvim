@@ -13,6 +13,7 @@ return {
         "IogaMaster/neocord",
         cond = require("configs.neocord").cond,
         opts = require("configs.neocord").opts,
+        cond = vim.g.host == "terminal",
     },
 
     {
@@ -22,6 +23,7 @@ return {
             "nvim-lua/plenary.nvim",
         },
         opts = {},
+        cond = vim.g.host == "terminal",
     },
 
     {

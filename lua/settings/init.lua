@@ -1,28 +1,14 @@
 require("settings.filetypes").setup()
 
+if vim.g.host == "terminal" then
+    require("settings.11-terminal")
+elseif vim.g.host == "vscode" then
+    require("settings.12-vscode")
+end
+
 -- make sure that the UI fills up the *entire* terminal window.
 -- purportedly this can be done in my wezterm config, but it's easy to
 -- do it here instead
-
-local augroup_ui = vim.api.nvim_create_augroup("fullsize_terminal_ui", {})
-
-vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
-    group = augroup_ui,
-    callback = function()
-        local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
-        if not normal.bg then
-            return
-        end
-        io.write(string.format("\027]11;#%06x\027\\", normal.bg))
-    end,
-})
-
-vim.api.nvim_create_autocmd("UILeave", {
-    group = augroup_ui,
-    callback = function()
-        io.write("\027]111\027\\")
-    end,
-})
 
 -- confirm before destructive actions
 vim.opt.confirm = true
@@ -34,10 +20,6 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
--- display tabs & trailing whitespace
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- line display
 vim.opt.number = true

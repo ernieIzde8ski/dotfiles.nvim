@@ -5,6 +5,7 @@ return {
         priority = 1000,
         lazy = false,
         config = require("configs.c_kanagawa"),
+        cond = vim.g.host == "terminal",
     },
 
     {
@@ -13,11 +14,15 @@ return {
         opts = {
             notification = { override_vim_notify = true },
         },
+        lazy = false,
+        priority = 100,
+        cond = vim.g.host == "terminal",
     },
 
     {
         "klen/nvim-config-local",
-        dependencies = { "j-hui/fidget.nvim" },
+        -- Should load first, but is not explicitly listed in case of VSCode
+        -- dependencies = { "j-hui/fidget.nvim" },
         opts = { lookup_parents = true },
     },
 

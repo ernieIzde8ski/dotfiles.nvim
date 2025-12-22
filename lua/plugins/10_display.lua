@@ -23,6 +23,7 @@ return {
         "nvim-tree/nvim-tree.lua",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = require("configs.nvim-tree"),
+        cond = vim.g.host == "terminal",
     },
 
     {
@@ -32,10 +33,12 @@ return {
             "nvim-tree/nvim-tree.lua",
         },
         opts = {},
+        cond = vim.g.host == "terminal",
     },
 
     {
         "felpafel/inlay-hint.nvim",
         config = true,
+        cond = vim.g.host == "terminal",
     },
 }
