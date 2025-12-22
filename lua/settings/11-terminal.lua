@@ -1,3 +1,7 @@
+-- make sure that the UI fills up the *entire* terminal window.
+-- purportedly this can be done in my wezterm config, but it's easy to
+-- do it here instead
+
 local augroup_ui = vim.api.nvim_create_augroup("fullsize_terminal_ui", {})
 
 vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {

@@ -6,10 +6,6 @@ elseif vim.g.host == "vscode" then
     require("settings.12-vscode")
 end
 
--- make sure that the UI fills up the *entire* terminal window.
--- purportedly this can be done in my wezterm config, but it's easy to
--- do it here instead
-
 -- confirm before destructive actions
 vim.opt.confirm = true
 

@@ -23,7 +23,7 @@ end
 ---@param line string
 ---@return string | nil
 local function parse_shebang_from_line(line)
-    if line:sub(1, 2) ~= "#!" or #line < 4 then
+    if line == nil or line:sub(1, 2) ~= "#!" or #line < 4 then
         return
     end
 
