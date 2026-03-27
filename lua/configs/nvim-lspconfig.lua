@@ -88,6 +88,19 @@ return function()
         root_markers = { ".stylua.toml", ".git" },
     })
 
+    lspconfig("tinymist", {
+        settings = {
+            exportPdf = "onSave",
+            formatterPrintWidth = 90,
+            formatterProseWrap = true,
+            lint = {
+                enabled = true,
+                when = "onType",
+            },
+            projectResolution = "lockDatabase",
+        },
+    })
+
     lspconfig("rust_analyzer", {
         settings = {
             ["rust-analyzer"] = {

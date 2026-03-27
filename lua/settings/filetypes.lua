@@ -69,6 +69,7 @@ local filetype_additions = {
         [".zshrc"] = "sh",
         [".zshenv"] = "sh",
         ["template"] = "bash", -- void-packages
+        ["tinymist.lock"] = "toml",
     },
     pattern = {
         [".*"] = function(_, bufnr)
@@ -82,6 +83,7 @@ local filetype_additions = {
                 return
             end
             vim.notify("shebang found: " .. shebang)
+
             if shebang == "xonsh" then
                 return shebang
             end
