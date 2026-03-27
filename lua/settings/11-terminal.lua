@@ -25,3 +25,5 @@ vim.api.nvim_create_autocmd("UILeave", {
 -- display tabs & trailing whitespace
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
+vim.opt.colorcolumn = { 80, 90 }
