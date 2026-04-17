@@ -93,6 +93,7 @@ return function()
             exportPdf = "onSave",
             formatterPrintWidth = 90,
             formatterProseWrap = true,
+            formatterMode = "typstyle",
             lint = {
                 enabled = true,
                 when = "onType",
