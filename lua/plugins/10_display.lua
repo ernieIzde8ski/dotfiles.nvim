@@ -3,9 +3,30 @@ return {
     -- syntax highlighting
     {
         "nvim-treesitter/nvim-treesitter",
+        lazy = false,
         build = ":TSUpdate",
-        main = "nvim-treesitter.configs",
-        opts = require("configs.nvim-treesitter"),
+        opts = {
+            ensure_installed = {
+                "diff",
+                "gitignore",
+                "gitcommit",
+                "gotmpl",
+                "haskell",
+                "ini",
+                "javascript",
+                "json",
+                "jsonc",
+                "lua",
+                "markdown",
+                "python",
+                "rust",
+                "toml",
+                "typescript",
+                "typst",
+                "vimdoc",
+                "yaml",
+            },
+        },
     },
 
     {

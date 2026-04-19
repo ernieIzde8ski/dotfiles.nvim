@@ -1,5 +1,6 @@
 return {
     cond = function()
+        vim.g.discord_available = vim.g.host == "terminal"
         if vim.g.discord_available == nil then
             vim.g.discord_available = os.execute("test -S $XDG_RUNTIME_DIR/discord-ipc-0")
                 == 0
