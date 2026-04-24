@@ -12,22 +12,6 @@ return function()
     end
     vim.cmd.syntax("enable")
 
-    -- make LSP/diagnostic displays have box-drawing character borders
-    local float_border = { border = "double" }
-
-    vim.lsp.handlers["textDocument/hover"] =
-        vim.lsp.with(vim.lsp.handlers.hover, float_border)
-
-    vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, float_border)
-
-    vim.diagnostic.config({
-        float = float_border,
-    })
-
-    require("kanagawa").setup({
-        -- transparent = true,
-    })
-
+    require("kanagawa").setup()
     vim.cmd.colorscheme("kanagawa")
 end

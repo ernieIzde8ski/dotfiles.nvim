@@ -9,6 +9,9 @@ end
 -- confirm before destructive actions
 vim.opt.confirm = true
 
+-- windows
+vim.opt.winborder = "rounded"
+
 -- folds
 vim.opt.foldcolumn = "0"
 vim.opt.foldenable = true
@@ -39,6 +42,6 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- misc
-vim.opt.scrolloff = 5
+vim.opt.scrolloff = 10
 vim.opt.splitbelow = true
 vim.g.editorconfig = true

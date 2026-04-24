@@ -25,7 +25,7 @@ local function callback(args)
         set_keymap("n", key, vim.lsp.buf[buf_op], bufnr)
     end
 
-    if client ~= nil and client.supports_method("textDocument/inlayHint") then
+    if client ~= nil and client:supports_method("textDocument/inlayHint") then
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         set_keymap("n", "<Leader>i", function()
             vim.lsp.inlay_hint.enable(

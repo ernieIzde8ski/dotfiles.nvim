@@ -24,7 +24,7 @@ return {
             "williamboman/mason.nvim",
             "hrsh7th/cmp-nvim-lsp",
         },
-        config = require("configs.c_mason-lspconfig"),
+        opts = require("configs.c_mason-lspconfig"),
     },
 
     {
